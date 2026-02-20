@@ -5,6 +5,5 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(244.5, 134.5)
-scale = Vector2(1.1624999, 1.1624999)
+position = Vector2(284, 137)
 texture = ExtResource("1_rupst")
