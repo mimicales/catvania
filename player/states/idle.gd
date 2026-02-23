@@ -10,6 +10,7 @@ func init() -> void:
 
 #what happens when we enter this state?
 func _enter() -> void:
+	player.animation_player.play("idle")
 	pass
 
 #what happens when we exit this state?
