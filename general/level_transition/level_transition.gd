@@ -35,7 +35,7 @@ func _on_player_entered( _n: Node2D) -> void:
 
 func _on_new_scene_ready(target_name : String, offset : Vector2) -> void:
 	if target_name == name:
-		var player : Node2D = get_tree().get_first_node_in_group("Player")
+		var player : Node = get_tree().get_first_node_in_group("Player")
 		player.global_position = global_position + offset
 	pass
 
