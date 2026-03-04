@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://vh8g1keux2ci"]
+
+[ext_resource type="Texture2D" uid="uid://bi7hqov15bgky" path="res://levels/sprites/champignon.png" id="1_qj6n8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4i886"]
+atlas = ExtResource("1_qj6n8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4g40"]
+atlas = ExtResource("1_qj6n8")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5kmou"]
+atlas = ExtResource("1_qj6n8")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8vmu"]
+atlas = ExtResource("1_qj6n8")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fjnna"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4i886")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4g40")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5kmou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8vmu")
+}],
+"loop": true,
+"name": &"animationchampi",
+"speed": 1.0
+}]
+
+[node name="minichampi" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_fjnna")
+animation = &"animationchampi"
+autoplay = "animationchampi"
+frame_progress = 0.034925442
+offset = Vector2(0, -16)

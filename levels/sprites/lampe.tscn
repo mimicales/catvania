@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckxpoxx7p6rho"]
+
+[ext_resource type="Texture2D" uid="uid://bphstefcvtdto" path="res://levels/sprites/lampe.png" id="1_k1yim"]
+[ext_resource type="Script" uid="uid://b6h3l10jncodm" path="res://general/scripts/light_flicker.gd" id="2_2qydb"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2qydb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_k1yim")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_hrk5p"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_81e3d"]
+gradient = SubResource("Gradient_hrk5p")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.86206895, 0.5)
+
+[node name="lampe" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_2qydb")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -24)
+color = Color(1, 0.76862746, 0.10980392, 1)
+energy = 0.5
+texture = SubResource("GradientTexture2D_81e3d")
+script = ExtResource("2_2qydb")

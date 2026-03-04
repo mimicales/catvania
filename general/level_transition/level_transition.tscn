@@ -6,10 +6,9 @@
 size = Vector2(32, 32)
 
 [node name="LevelTransition" type="Node2D"]
+z_index = 99
 script = ExtResource("1_d5xbk")
-size = null
 target_level = "<null>"
-target_area_name = null
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
