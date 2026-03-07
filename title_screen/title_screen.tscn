@@ -1,0 +1,283 @@
+[gd_scene load_steps=13 format=4 uid="uid://bp60xm6xlg4c7"]
+
+[ext_resource type="TileSet" uid="uid://cwuplu8oy43x3" path="res://levels/tilesets/autumnforest.tres" id="1_dxpbd"]
+[ext_resource type="Script" uid="uid://cwvfm7jj71s1i" path="res://title_screen/title_screen.gd" id="1_vbjqi"]
+[ext_resource type="Texture2D" uid="uid://2bg0duesyrdy" path="res://light_stream.jpg" id="2_2dq6q"]
+[ext_resource type="Texture2D" uid="uid://bwtnu1dysgoo6" path="res://title_screen/yarnbeast_logo.png" id="3_2dq6q"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vbjqi"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0m3ch"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_8sv46"]
+offsets = PackedFloat32Array(0.23809524, 1)
+colors = PackedColorArray(0.9411586, 0.2939596, 0, 1, 1, 0.58431375, 0.45882353, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fk0fn"]
+gradient = SubResource("Gradient_8sv46")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0.3)
+metadata/_snap_enabled = true
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oqrgu"]
+emission_shape = 3
+emission_box_extents = Vector3(500, 0, 1)
+direction = Vector3(0, 0, 0)
+spread = 23.0
+initial_velocity_max = 111.11
+gravity = Vector3(0, 100, 0)
+scale_min = 0.5
+scale_max = 1.5
+
+[sub_resource type="Animation" id="Animation_0m3ch"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_vbjqi"]
+resource_name = "logo_menu"
+length = 4.0
+loop_mode = 1
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.8559536, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fk0fn"]
+_data = {
+&"RESET": SubResource("Animation_0m3ch"),
+&"logo_menu": SubResource("Animation_vbjqi")
+}
+
+[node name="TitleScreen" type="CanvasLayer"]
+layer = 5
+script = ExtResource("1_vbjqi")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TileMapContainer" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Node2D" parent="Control/TileMapContainer"]
+position = Vector2(30, 58)
+scale = Vector2(0.52270925, 0.52270925)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Control/TileMapContainer/Background"]
+position = Vector2(-13.831413, 254.70758)
+scale = Vector2(1.324921, 1.1912917)
+tile_map_data = PackedByteArray("AAD///n/AgAeAAYAAAD///r/AgAeAAcAAAD///v/AgAeAAgAAAD///z/AgAeAAkAAAD///3/AgAeAAoAAAD///7/AgAeAAsAAAD/////AgAeAAwAAAD//wAAAgAeAA0AAAD//wEAAgAeAA4AAAD//wIAAgAeAA8AAAAAAPn/AgAeAAYAAAAAAPr/AgAeAAcAAAAAAPv/AgAeAAgAAAAAAPz/AgAeAAkAAAAAAP3/AgAeAAoAAAAAAP7/AgAeAAsAAAAAAP//AgAeAAwAAAAAAAAAAgAeAA0AAAAAAAEAAgAeAA4AAAAAAAIAAgAeAA8AAAABAPn/AgAeAAYAAAABAPr/AgAeAAcAAAABAPv/AgAeAAgAAAABAPz/AgAeAAkAAAABAP3/AgAeAAoAAAABAP7/AgAeAAsAAAABAP//AgAeAAwAAAABAAAAAgAeAA0AAAABAAEAAgAeAA4AAAABAAIAAgAeAA8AAAACAPn/AgAeAAYAAAACAPr/AgAeAAcAAAACAPv/AgAeAAgAAAACAPz/AgAeAAkAAAACAP3/AgAeAAoAAAACAP7/AgAeAAsAAAACAP//AgAeAAwAAAACAAAAAgAeAA0AAAACAAEAAgAeAA4AAAACAAIAAgAeAA8AAAADAPn/AgAeAAYAAAADAPr/AgAeAAcAAAADAPv/AgAeAAgAAAADAPz/AgAeAAkAAAADAP3/AgAeAAoAAAADAP7/AgAeAAsAAAADAP//AgAeAAwAAAADAAAAAgAeAA0AAAADAAEAAgAeAA4AAAADAAIAAgAeAA8AAAAEAPn/AgAeAAYAAAAEAPr/AgAeAAcAAAAEAPv/AgAeAAgAAAAEAPz/AgAeAAkAAAAEAP3/AgAeAAoAAAAEAP7/AgAeAAsAAAAEAP//AgAeAAwAAAAEAAAAAgAeAA0AAAAEAAEAAgAeAA4AAAAEAAIAAgAeAA8AAAAFAPn/AgAeAAYAAAAFAPr/AgAeAAcAAAAFAPv/AgAeAAgAAAAFAPz/AgAeAAkAAAAFAP3/AgAeAAoAAAAFAP7/AgAeAAsAAAAFAP//AgAeAAwAAAAFAAAAAgAeAA0AAAAFAAEAAgAeAA4AAAAFAAIAAgAeAA8AAAAGAPn/AgAeAAYAAAAGAPr/AgAeAAcAAAAGAPv/AgAeAAgAAAAGAPz/AgAeAAkAAAAGAP3/AgAeAAoAAAAGAP7/AgAeAAsAAAAGAP//AgAeAAwAAAAGAAAAAgAeAA0AAAAGAAEAAgAeAA4AAAAGAAIAAgAeAA8AAAAHAPn/AgAeAAYAAAAHAPr/AgAeAAcAAAAHAPv/AgAeAAgAAAAHAPz/AgAeAAkAAAAHAP3/AgAeAAoAAAAHAP7/AgAeAAsAAAAHAP//AgAeAAwAAAAHAAAAAgAeAA0AAAAHAAEAAgAeAA4AAAAHAAIAAgAeAA8AAAAIAPn/AgAeAAYAAAAIAPr/AgAeAAcAAAAIAPv/AgAeAAgAAAAIAPz/AgAeAAkAAAAIAP3/AgAeAAoAAAAIAP7/AgAeAAsAAAAIAP//AgAeAAwAAAAIAAAAAgAeAA0AAAAIAAEAAgAeAA4AAAAIAAIAAgAeAA8AAAAJAPn/AgAeAAYAAAAJAPr/AgAeAAcAAAAJAPv/AgAeAAgAAAAJAPz/AgAeAAkAAAAJAP3/AgAeAAoAAAAJAP7/AgAeAAsAAAAJAP//AgAeAAwAAAAJAAAAAgAeAA0AAAAJAAEAAgAeAA4AAAAJAAIAAgAeAA8AAAAKAPn/AgAeAAYAAAAKAPr/AgAeAAcAAAAKAPv/AgAeAAgAAAAKAPz/AgAeAAkAAAAKAP3/AgAeAAoAAAAKAP7/AgAeAAsAAAAKAP//AgAeAAwAAAAKAAAAAgAeAA0AAAAKAAEAAgAeAA4AAAAKAAIAAgAeAA8AAAALAPn/AgAeAAYAAAALAPr/AgAeAAcAAAALAPv/AgAeAAgAAAALAPz/AgAeAAkAAAALAP3/AgAeAAoAAAALAP7/AgAeAAsAAAALAP//AgAeAAwAAAALAAAAAgAeAA0AAAALAAEAAgAeAA4AAAALAAIAAgAeAA8AAAAMAPn/AgAeAAYAAAAMAPr/AgAeAAcAAAAMAPv/AgAeAAgAAAAMAPz/AgAeAAkAAAAMAP3/AgAeAAoAAAAMAP7/AgAeAAsAAAAMAP//AgAeAAwAAAAMAAAAAgAeAA0AAAAMAAEAAgAeAA4AAAAMAAIAAgAeAA8AAAANAPn/AgAeAAYAAAANAPr/AgAeAAcAAAANAPv/AgAeAAgAAAANAPz/AgAeAAkAAAANAP3/AgAeAAoAAAANAP7/AgAeAAsAAAANAP//AgAeAAwAAAANAAAAAgAeAA0AAAANAAEAAgAeAA4AAAANAAIAAgAeAA8AAAAOAPn/AgAeAAYAAAAOAPr/AgAeAAcAAAAOAPv/AgAeAAgAAAAOAPz/AgAeAAkAAAAOAP3/AgAeAAoAAAAOAP7/AgAeAAsAAAAOAP//AgAeAAwAAAAOAAAAAgAeAA0AAAAOAAEAAgAeAA4AAAAOAAIAAgAeAA8AAAAPAPn/AgAeAAYAAAAPAPr/AgAeAAcAAAAPAPv/AgAeAAgAAAAPAPz/AgAeAAkAAAAPAP3/AgAeAAoAAAAPAP7/AgAeAAsAAAAPAP//AgAeAAwAAAAPAAAAAgAeAA0AAAAPAAEAAgAeAA4AAAAPAAIAAgAeAA8AAAAQAPn/AgAeAAYAAAAQAPr/AgAeAAcAAAAQAPv/AgAeAAgAAAAQAPz/AgAeAAkAAAAQAP3/AgAeAAoAAAAQAP7/AgAeAAsAAAAQAP//AgAeAAwAAAAQAAAAAgAeAA0AAAAQAAEAAgAeAA4AAAAQAAIAAgAeAA8AAAARAPn/AgAeAAYAAAARAPr/AgAeAAcAAAARAPv/AgAeAAgAAAARAPz/AgAeAAkAAAARAP3/AgAeAAoAAAARAP7/AgAeAAsAAAARAP//AgAeAAwAAAARAAAAAgAeAA0AAAARAAEAAgAeAA4AAAARAAIAAgAeAA8AAAASAPn/AgAeAAYAAAASAPr/AgAeAAcAAAASAPv/AgAeAAgAAAASAPz/AgAeAAkAAAASAP3/AgAeAAoAAAASAP7/AgAeAAsAAAASAP//AgAeAAwAAAASAAAAAgAeAA0AAAASAAEAAgAeAA4AAAASAAIAAgAeAA8AAAATAPn/AgAeAAYAAAATAPr/AgAeAAcAAAATAPv/AgAeAAgAAAATAPz/AgAeAAkAAAATAP3/AgAeAAoAAAATAP7/AgAeAAsAAAATAP//AgAeAAwAAAATAAAAAgAeAA0AAAATAAEAAgAeAA4AAAATAAIAAgAeAA8AAAAUAPn/AgAeAAYAAAAUAPr/AgAeAAcAAAAUAPv/AgAeAAgAAAAUAPz/AgAeAAkAAAAUAP3/AgAeAAoAAAAUAP7/AgAeAAsAAAAUAP//AgAeAAwAAAAUAAAAAgAeAA0AAAAUAAEAAgAeAA4AAAAUAAIAAgAeAA8AAAD///f/AgAeAAYAAAD///j/AgAeAAYAAAAAAPf/AgAeAAYAAAAAAPj/AgAeAAYAAAABAPf/AgAeAAYAAAABAPj/AgAeAAYAAAACAPf/AgAeAAYAAAACAPj/AgAeAAYAAAADAPf/AgAeAAYAAAADAPj/AgAeAAYAAAAEAPf/AgAeAAYAAAAEAPj/AgAeAAYAAAAFAPf/AgAeAAYAAAAFAPj/AgAeAAYAAAAGAPf/AgAeAAYAAAAGAPj/AgAeAAYAAAAHAPf/AgAeAAYAAAAHAPj/AgAeAAYAAAAIAPf/AgAeAAYAAAAIAPj/AgAeAAYAAAAJAPf/AgAeAAYAAAAJAPj/AgAeAAYAAAAKAPf/AgAeAAYAAAAKAPj/AgAeAAYAAAALAPf/AgAeAAYAAAALAPj/AgAeAAYAAAAMAPf/AgAeAAYAAAAMAPj/AgAeAAYAAAANAPf/AgAeAAYAAAANAPj/AgAeAAYAAAAOAPf/AgAeAAYAAAAOAPj/AgAeAAYAAAAPAPf/AgAeAAYAAAAPAPj/AgAeAAYAAAAQAPf/AgAeAAYAAAAQAPj/AgAeAAYAAAARAPf/AgAeAAYAAAARAPj/AgAeAAYAAAASAPf/AgAeAAYAAAASAPj/AgAeAAYAAAATAPf/AgAeAAYAAAATAPj/AgAeAAYAAAAUAPf/AgAeAAYAAAAUAPj/AgAeAAYAAAD//wMAAgAeAA8AAAD//wQAAgAeAA8AAAAAAAMAAgAeAA8AAAAAAAQAAgAeAA8AAAABAAMAAgAeAA8AAAABAAQAAgAeAA8AAAACAAMAAgAeAA8AAAACAAQAAgAeAA8AAAADAAMAAgAeAA8AAAADAAQAAgAeAA8AAAAEAAMAAgAeAA8AAAAEAAQAAgAeAA8AAAAFAAMAAgAeAA8AAAAFAAQAAgAeAA8AAAAGAAMAAgAeAA8AAAAGAAQAAgAeAA8AAAAHAAMAAgAeAA8AAAAHAAQAAgAeAA8AAAAIAAMAAgAeAA8AAAAIAAQAAgAeAA8AAAAJAAMAAgAeAA8AAAAJAAQAAgAeAA8AAAAKAAMAAgAeAA8AAAAKAAQAAgAeAA8AAAALAAMAAgAeAA8AAAALAAQAAgAeAA8AAAAMAAMAAgAeAA8AAAAMAAQAAgAeAA8AAAANAAMAAgAeAA8AAAANAAQAAgAeAA8AAAAOAAMAAgAeAA8AAAAOAAQAAgAeAA8AAAAPAAMAAgAeAA8AAAAPAAQAAgAeAA8AAAAQAAMAAgAeAA8AAAAQAAQAAgAeAA8AAAARAAMAAgAeAA8AAAARAAQAAgAeAA8AAAASAAMAAgAeAA8AAAASAAQAAgAeAA8AAAATAAMAAgAeAA8AAAATAAQAAgAeAA8AAAAUAAMAAgAeAA8AAAAUAAQAAgAeAA8AAAD///b/AgAeAAYAAAAAAPb/AgAeAAYAAAABAPb/AgAeAAYAAAACAPb/AgAeAAYAAAADAPb/AgAeAAYAAAAEAPb/AgAeAAYAAAAFAPb/AgAeAAYAAAAGAPb/AgAeAAYAAAAHAPb/AgAeAAYAAAAIAPb/AgAeAAYAAAAJAPb/AgAeAAYAAAAKAPb/AgAeAAYAAAALAPb/AgAeAAYAAAAMAPb/AgAeAAYAAAANAPb/AgAeAAYAAAAOAPb/AgAeAAYAAAAPAPb/AgAeAAYAAAAQAPb/AgAeAAYAAAARAPb/AgAeAAYAAAASAPb/AgAeAAYAAAATAPb/AgAeAAYAAAAUAPb/AgAeAAYAAAD//wUAAgAeAA8AAAAAAAUAAgAeAA8AAAABAAUAAgAeAA8AAAACAAUAAgAeAA8AAAADAAUAAgAeAA8AAAAEAAUAAgAeAA8AAAAFAAUAAgAeAA8AAAAGAAUAAgAeAA8AAAAHAAUAAgAeAA8AAAAIAAUAAgAeAA8AAAAJAAUAAgAeAA8AAAAKAAUAAgAeAA8AAAALAAUAAgAeAA8AAAAMAAUAAgAeAA8AAAANAAUAAgAeAA8AAAAOAAUAAgAeAA8AAAAPAAUAAgAeAA8AAAAQAAUAAgAeAA8AAAARAAUAAgAeAA8AAAASAAUAAgAeAA8AAAATAAUAAgAeAA8AAAAUAAUAAgAeAA8AAAD///P/AgAeAAYAAAD///T/AgAeAAYAAAD///X/AgAeAAYAAAAAAPP/AgAeAAYAAAAAAPT/AgAeAAYAAAAAAPX/AgAeAAYAAAABAPP/AgAeAAYAAAABAPT/AgAeAAYAAAABAPX/AgAeAAYAAAACAPP/AgAeAAYAAAACAPT/AgAeAAYAAAACAPX/AgAeAAYAAAADAPP/AgAeAAYAAAADAPT/AgAeAAYAAAADAPX/AgAeAAYAAAAEAPP/AgAeAAYAAAAEAPT/AgAeAAYAAAAEAPX/AgAeAAYAAAAFAPP/AgAeAAYAAAAFAPT/AgAeAAYAAAAFAPX/AgAeAAYAAAAGAPP/AgAeAAYAAAAGAPT/AgAeAAYAAAAGAPX/AgAeAAYAAAAHAPP/AgAeAAYAAAAHAPT/AgAeAAYAAAAHAPX/AgAeAAYAAAAIAPP/AgAeAAYAAAAIAPT/AgAeAAYAAAAIAPX/AgAeAAYAAAAJAPP/AgAeAAYAAAAJAPT/AgAeAAYAAAAJAPX/AgAeAAYAAAAKAPP/AgAeAAYAAAAKAPT/AgAeAAYAAAAKAPX/AgAeAAYAAAALAPP/AgAeAAYAAAALAPT/AgAeAAYAAAALAPX/AgAeAAYAAAAMAPP/AgAeAAYAAAAMAPT/AgAeAAYAAAAMAPX/AgAeAAYAAAANAPP/AgAeAAYAAAANAPT/AgAeAAYAAAANAPX/AgAeAAYAAAAOAPP/AgAeAAYAAAAOAPT/AgAeAAYAAAAOAPX/AgAeAAYAAAAPAPP/AgAeAAYAAAAPAPT/AgAeAAYAAAAPAPX/AgAeAAYAAAAQAPP/AgAeAAYAAAAQAPT/AgAeAAYAAAAQAPX/AgAeAAYAAAARAPP/AgAeAAYAAAARAPT/AgAeAAYAAAARAPX/AgAeAAYAAAASAPP/AgAeAAYAAAASAPT/AgAeAAYAAAASAPX/AgAeAAYAAAATAPP/AgAeAAYAAAATAPT/AgAeAAYAAAATAPX/AgAeAAYAAAAUAPP/AgAeAAYAAAAUAPT/AgAeAAYAAAAUAPX/AgAeAAYAAAA=")
+tile_set = ExtResource("1_dxpbd")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="Control/TileMapContainer/Background"]
+position = Vector2(-442.59918, 176.00607)
+scale = Vector2(1.5000002, 1.5000002)
+tile_map_data = PackedByteArray("AAASAAMAAgANAA4AAAAIAP//AgANAAoAAAAIAAAAAgANAAsAAAAIAAEAAgANAAwAAAAIAAIAAgANAA0AAAAIAAMAAgANAA4AAAAJAP3/AgAOAAgAAAAJAP7/AgAOAAkAAAAJAP//AgAOAAoAAAAJAAAAAgAOAAsAAAAJAAEAAgAOAAwAAAAJAAIAAgAOAA0AAAAJAAMAAgAOAA4AAAAJAAQAAgAOAA8AAAAKAP7/AgAPAAkAAAAKAP//AgAPAAoAAAAKAAAAAgAPAAsAAAAKAAEAAgAPAAwAAAAKAAIAAgAPAA0AAAAKAAMAAgAPAA4AAAANAAEAAgANAAoAAAANAAIAAgANAAsAAAANAAMAAgANAAwAAAANAAQAAgANAA0AAAANAAUAAgANAA4AAAAOAP//AgAOAAgAAAAOAAAAAgAOAAkAAAAOAAEAAgAOAAoAAAAOAAIAAgAOAAsAAAAOAAMAAgAOAAwAAAAOAAQAAgAOAA0AAAAOAAUAAgAOAA4AAAAOAAYAAgAOAA8AAAAPAAAAAgAPAAkAAAAPAAEAAgAPAAoAAAAPAAIAAgAPAAsAAAAPAAMAAgAPAAwAAAAPAAQAAgAPAA0AAAAPAAUAAgAPAA4AAAATAAAAAgANAAoAAAATAAEAAgANAAsAAAATAAIAAgANAAwAAAATAAMAAgANAA0AAAATAAQAAgANAA4AAAAUAP7/AgAOAAgAAAAUAP//AgAOAAkAAAAUAAAAAgAOAAoAAAAUAAEAAgAOAAsAAAAUAAIAAgAOAAwAAAAUAAMAAgAOAA0AAAAUAAQAAgAOAA4AAAAUAAUAAgAOAA8AAAAVAP//AgAPAAkAAAAVAAAAAgAPAAoAAAAVAAEAAgAPAAsAAAAVAAIAAgAPAAwAAAAVAAMAAgAPAA0AAAAVAAQAAgAPAA4AAAAXAP//AgANAAoAAAAXAAAAAgANAAsAAAAXAAEAAgANAAwAAAAXAAIAAgANAA0AAAAXAAMAAgANAA4AAAAYAP3/AgAOAAgAAAAYAP7/AgAOAAkAAAAYAP//AgAOAAoAAAAYAAAAAgAOAAsAAAAYAAEAAgAOAAwAAAAYAAIAAgAOAA0AAAAYAAMAAgAOAA4AAAAYAAQAAgAOAA8AAAAZAP7/AgAPAAkAAAAZAP//AgAPAAoAAAAZAAAAAgAPAAsAAAAZAAEAAgAPAAwAAAAZAAIAAgAPAA0AAAAZAAMAAgAPAA4AAAA=")
+tile_set = ExtResource("1_dxpbd")
+
+[node name="TileMapLayer3" type="TileMapLayer" parent="Control/TileMapContainer/Background"]
+modulate = Color(0.7261758, 0.46239203, 0.3439239, 1)
+position = Vector2(-503.1478, 137.7439)
+scale = Vector2(1.5000001, 1.5000001)
+tile_map_data = PackedByteArray("AAATAAIAAgANAAoAAAATAAMAAgANAAsAAAATAAQAAgANAAwAAAATAAUAAgANAA0AAAATAAYAAgANAA4AAAAUAAAAAgAOAAgAAAAUAAEAAgAOAAkAAAAUAAIAAgAOAAoAAAAUAAMAAgAOAAsAAAAUAAQAAgAOAAwAAAAUAAUAAgAOAA0AAAAUAAYAAgAOAA4AAAAUAAcAAgAOAA8AAAAVAAEAAgAPAAkAAAAVAAIAAgAPAAoAAAAVAAMAAgAPAAsAAAAVAAQAAgAPAAwAAAAVAAUAAgAPAA0AAAAVAAYAAgAPAA4AAAALAAMAAgANAAoAAAALAAQAAgANAAsAAAALAAUAAgANAAwAAAALAAYAAgANAA0AAAALAAcAAgANAA4AAAAMAAEAAgAOAAgAAAAMAAIAAgAOAAkAAAAMAAMAAgAOAAoAAAAMAAQAAgAOAAsAAAAMAAUAAgAOAAwAAAAMAAYAAgAOAA0AAAAMAAcAAgAOAA4AAAAMAAgAAgAOAA8AAAANAAIAAgAPAAkAAAANAAMAAgAPAAoAAAANAAQAAgAPAAsAAAANAAUAAgAPAAwAAAANAAYAAgAPAA0AAAANAAcAAgAPAA4AAAAXAAQAAgANAAoAAAAXAAUAAgANAAsAAAAXAAYAAgANAAwAAAAXAAcAAgANAA0AAAAXAAgAAgANAA4AAAAYAAIAAgAOAAgAAAAYAAMAAgAOAAkAAAAYAAQAAgAOAAoAAAAYAAUAAgAOAAsAAAAYAAYAAgAOAAwAAAAYAAcAAgAOAA0AAAAYAAgAAgAOAA4AAAAYAAkAAgAOAA8AAAAZAAMAAgAPAAkAAAAZAAQAAgAPAAoAAAAZAAUAAgAPAAsAAAAZAAYAAgAPAAwAAAAZAAcAAgAPAA0AAAAZAAgAAgAPAA4AAAAbAAMAAgANAAoAAAAbAAQAAgANAAsAAAAbAAUAAgANAAwAAAAbAAYAAgANAA0AAAAbAAcAAgANAA4AAAAcAAEAAgAOAAgAAAAcAAIAAgAOAAkAAAAcAAMAAgAOAAoAAAAcAAQAAgAOAAsAAAAcAAUAAgAOAAwAAAAcAAYAAgAOAA0AAAAcAAcAAgAOAA4AAAAcAAgAAgAOAA8AAAAdAAIAAgAPAAkAAAAdAAMAAgAPAAoAAAAdAAQAAgAPAAsAAAAdAAUAAgAPAAwAAAAdAAYAAgAPAA0AAAAdAAcAAgAPAA4AAAA=")
+tile_set = ExtResource("1_dxpbd")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/TileMapContainer/Background"]
+modulate = Color(1, 0.3137255, 0.011764706, 0.5686275)
+z_index = 5
+material = SubResource("CanvasItemMaterial_vbjqi")
+position = Vector2(610.2819, 78.437485)
+rotation = 0.33244458
+scale = Vector2(1.7720459, 1.4505994)
+texture = ExtResource("2_2dq6q")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Control/TileMapContainer/Background"]
+modulate = Color(1, 0.3137255, 0.011764706, 0.5686275)
+z_index = 5
+material = SubResource("CanvasItemMaterial_vbjqi")
+position = Vector2(344.35968, 3.8262005)
+rotation = 0.33244458
+scale = Vector2(1.7720459, 1.4505994)
+texture = ExtResource("2_2dq6q")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Control/TileMapContainer/Background"]
+modulate = Color(1, 0.3137255, 0.011764706, 0.5686275)
+z_index = 5
+material = SubResource("CanvasItemMaterial_vbjqi")
+position = Vector2(154.9619, -32.522865)
+rotation = 0.38688368
+scale = Vector2(0.65447927, 1.5253668)
+texture = ExtResource("2_2dq6q")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Control/TileMapContainer/Background"]
+z_index = 10
+material = SubResource("CanvasItemMaterial_0m3ch")
+position = Vector2(397.92676, -177.91917)
+scale = Vector2(0.99999994, 0.99999994)
+amount = 50
+texture = SubResource("GradientTexture2D_fk0fn")
+lifetime = 5.0
+preprocess = 2.0
+speed_scale = 0.2
+randomness = 1.0
+visibility_rect = Rect2(-100, 0, 200, 200)
+process_material = SubResource("ParticleProcessMaterial_oqrgu")
+
+[node name="MainMenu" type="VBoxContainer" parent="Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 120)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -16.0
+offset_right = 80.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="Logo" type="Control" parent="Control/MainMenu"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/MainMenu/Logo"]
+position = Vector2(21, -31)
+scale = Vector2(1.8, 1.8)
+texture = ExtResource("3_2dq6q")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control/MainMenu/Logo"]
+libraries = {
+&"": SubResource("AnimationLibrary_fk0fn")
+}
+autoplay = "logo_menu"
+
+[node name="ContinueButton" type="Button" parent="Control/MainMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Continue"
+
+[node name="NewGameButton" type="Button" parent="Control/MainMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "New Game"
+
+[node name="LoadGameButton" type="Button" parent="Control/MainMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load Game"
+
+[node name="NewGameMenu" type="VBoxContainer" parent="Control"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.5
+offset_top = -28.0
+offset_right = 44.5
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Control/NewGameMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Start a new game..."
+
+[node name="NewSlot01" type="Button" parent="Control/NewGameMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save 01"
+
+[node name="NewSlot02" type="Button" parent="Control/NewGameMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save 02"
+
+[node name="NewSlot03" type="Button" parent="Control/NewGameMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Save 03"
+
+[node name="LoadGameMenu" type="VBoxContainer" parent="Control"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -44.5
+offset_top = -28.0
+offset_right = 44.5
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="Control/LoadGameMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Load a saved game..."
+
+[node name="LoadSlot01" type="Button" parent="Control/LoadGameMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load Save 01"
+
+[node name="LoadSlot02" type="Button" parent="Control/LoadGameMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load Save 02"
+
+[node name="LoadSlot03" type="Button" parent="Control/LoadGameMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Load Save 03"

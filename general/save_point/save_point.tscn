@@ -1,0 +1,128 @@
+[gd_scene load_steps=7 format=3 uid="uid://clbiwmhcgjaeo"]
+
+[ext_resource type="Texture2D" uid="uid://dndno7h3xrvph" path="res://levels/sprites/banc.png" id="1_a0gwv"]
+[ext_resource type="Script" uid="uid://bd37p3gxkv2co" path="res://general/save_point/save_point.gd" id="1_f82ql"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a0gwv"]
+size = Vector2(54, 38)
+
+[sub_resource type="Animation" id="Animation_f82ql"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-48, -60)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_a0gwv"]
+resource_name = "game_saved"
+length = 2.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3499311, 0.5633037, 1.8264697, 2.2),
+"transitions": PackedFloat32Array(-2, 1, 1, 1, -2),
+"update": 0,
+"values": [Vector2(-48, -47), Vector2(-48, -81), Vector2(-48, -86), Vector2(-48, -86), Vector2(-48, -47)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.36, 1.8333334, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5y7y7"]
+_data = {
+&"RESET": SubResource("Animation_f82ql"),
+&"game_saved": SubResource("Animation_a0gwv")
+}
+
+[node name="SavePoint" type="Node2D"]
+script = ExtResource("1_f82ql")
+
+[node name="Banc" type="Sprite2D" parent="."]
+position = Vector2(0, -17)
+texture = ExtResource("1_a0gwv")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_a0gwv")
+debug_color = Color(0.99215686, 0.33333334, 0.8117647, 0.2627451)
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Label" type="Label" parent="Node2D"]
+visible = false
+offset_left = -48.0
+offset_top = -60.0
+offset_right = 48.0
+offset_bottom = -37.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 2
+text = "Game Saved"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_5y7y7")
+}

@@ -1,6 +1,4 @@
-class_name PlayerStateIdle extends PlayerState
-
-
+class_name PlayerStateSit extends PlayerState
 
 
 #what happens when this state is initialized
@@ -9,15 +7,18 @@ func init() -> void:
 
 #what happens when we enter this state?
 func _enter() -> void:
-	player.animation_player.play("idle")
+	player.animation_player.play("sit")
+	player.animation_player.animation_finished.connect(_on_animation_finished)
 	pass
 
 #what happens when we exit this state?
 func _exit() -> void:
+	if player.animation_player.animation_finished.is_connected(_on_animation_finished):
+		player.animation_player.animation_finished.disconnect(_on_animation_finished)
 	pass
 
 #what happens when an imput is pressed?
-func handle_input(_event : InputEvent) -> PlayerState:
+func handle_input( _event : InputEvent) -> PlayerState:
 	if _event.is_action_pressed("jump"):
 		return jump
 	return next_state
@@ -36,3 +37,9 @@ func physics_process(_delta: float) -> PlayerState:
 	if player.is_on_floor() == false:
 		return fall
 	return next_state
+	
+	
+func _on_animation_finished(_anim_name: String) -> void:
+	player.animation_player.play("sit")
+	player.animation_player.seek(1.0, true)  # retourne au début de la 3ème frame
+	pass

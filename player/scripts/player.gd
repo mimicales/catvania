@@ -19,6 +19,22 @@ var previous_state : PlayerState :
 	get : return states[1]
 #endregion
 
+#region /// Player Stats
+var hp : float = 20 :
+	set(value):
+		hp = clampf(value, 0, max_hp)
+		Messages.player_health_changed.emit(hp, max_hp)
+var max_hp : float = 20:
+	set(value):
+		max_hp = value
+		Messages.player_health_changed.emit(hp, max_hp)
+var double_jump : bool = false
+var swim : bool = false 
+var night_vision : bool = false 
+var ground_slam : bool = false 
+var morph_roll : bool = false 
+#endregion
+
 #region /// Standard Variables
 var direction : Vector2 = Vector2.ZERO
 var gravity : float = 980
@@ -32,10 +48,31 @@ func _ready() -> void:
 		self.queue_free()
 	initialize_states()
 	self.call_deferred("reparent",get_tree().root)
+	Messages.player_healed.connect(_on_player_healed)
 	pass
 
 #use pour connecter avec le input du joueur
 func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("action"):
+		Messages.player_interacted.emit(self)
+	elif event.is_action_pressed("pause"):
+		get_tree().paused = true
+		var pause_menu : PauseMenu = load("res://pause_menu/pause_menu.tscn").instantiate()
+		add_child(pause_menu)
+		return
+	#A ENLEVER EVENTUELLEMENT
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_MINUS:
+			if Input.is_key_pressed(KEY_SHIFT):
+				max_hp -=10
+			else:
+				hp -=5
+		elif event.keycode == KEY_EQUAL:
+			if Input.is_key_pressed(KEY_SHIFT):
+				max_hp +=10
+			else:
+				hp +=5
+		
 	change_state(current_state.handle_input(event))
 	pass
 
@@ -104,4 +141,9 @@ func update_direction() -> void:
 			sprite.flip_h = true
 		elif direction.x >0:
 			sprite.flip_h = false
+	pass
+
+
+func _on_player_healed(amount : float)-> void:
+	hp = min(hp + amount, max_hp)
 	pass
