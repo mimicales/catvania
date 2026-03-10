@@ -2,7 +2,7 @@
 @icon("res://general/icons/map_node.svg")
 class_name  MapNode extends Control
 
-const SCALE_FACTOR : float = 30
+const SCALE_FACTOR : float = 20
 
 @export_file("*.tscn") var linked_scene : String : set = _on_scene_set
 @export_tool_button("Update") var update_node_action = update_node
@@ -12,7 +12,9 @@ const SCALE_FACTOR : float = 30
 @export var entrances_bottom : Array[float] =[]
 @export var entrances_left : Array[float] =[]
 
-var indicator_offset : Vector2 = Vector2.ZERO
+@export var node_color : Color = Color.WHITE : set = _set_node_color
+
+@export var indicator_offset : Vector2 = Vector2.ZERO
 
 @onready var label: Label = $Label
 @onready var transition_blocks: Control = %TransitionBlocks
@@ -26,6 +28,9 @@ func _ready() -> void:
 		create_transition_blocks()
 		if not SaveManager.is_area_discovered(linked_scene):
 			visible = false
+		elif SceneManager.current_scene_uid == linked_scene:
+			display_player_location()
+		_set_node_color(node_color)
 	pass
 
 
@@ -124,3 +129,18 @@ func add_block()-> ColorRect:
 	block.custom_minimum_size.x = 1
 	block.custom_minimum_size.y = 1
 	return block
+
+
+func _set_node_color(color: Color) -> void:
+	node_color = color
+	for child in get_children():
+		if child is ColorRect:
+			child.color = color
+
+func display_player_location() -> void:
+	var player : Player = get_tree().get_first_node_in_group("Player")
+	var i : Control = %PlayerIndicator
+	var pos : Vector2 = position
+	pos += ((player.global_position - indicator_offset)/SCALE_FACTOR)
+	i.position = pos
+	pass

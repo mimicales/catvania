@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdjl4n3cslohv"]
+[gd_scene load_steps=4 format=3 uid="uid://bdjl4n3cslohv"]
 
 [ext_resource type="Script" uid="uid://bbt58atnu2d06" path="res://pause_menu/scripts/pause_menu.gd" id="1_5hbt6"]
 [ext_resource type="PackedScene" uid="uid://c3q8fntgdvf1i" path="res://pause_menu/map_node.tscn" id="2_rd7dy"]
+[ext_resource type="Texture2D" uid="uid://css7nakf65a" path="res://pause_menu/player_icon.png" id="3_uwtdo"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
@@ -54,6 +55,7 @@ text = "Paused"
 
 [node name="PauseScreen" type="Control" parent="Control"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -102,37 +104,57 @@ color = Color(0.8784314, 0.7882353, 0.6117647, 1)
 layout_mode = 0
 offset_left = 24.0
 offset_top = 26.0
-offset_right = 47.0
-offset_bottom = 40.0
+offset_right = 59.0
+offset_bottom = 48.0
 linked_scene = "uid://bpmbexp2p7wki"
 entrances_top = Array[float]([])
-entrances_right = Array[float]([4.025])
+entrances_right = Array[float]([11.05])
 entrances_bottom = Array[float]([])
 entrances_left = Array[float]([])
+node_color = Color(0.76862746, 0.32941177, 0.019607844, 1)
+indicator_offset = Vector2(-31, -177)
 
 [node name="MapNode2" parent="Control/PauseScreen/Map" instance=ExtResource("2_rd7dy")]
 layout_mode = 0
-offset_left = 48.0
-offset_top = 27.0
-offset_right = 77.0
-offset_bottom = 38.0
+offset_left = 60.0
+offset_top = 28.0
+offset_right = 103.0
+offset_bottom = 45.0
 linked_scene = "uid://dgcclufdkcuon"
 entrances_top = Array[float]([])
 entrances_right = Array[float]([])
-entrances_bottom = Array[float]([16.575])
-entrances_left = Array[float]([3.025])
+entrances_bottom = Array[float]([33.15])
+entrances_left = Array[float]([9.05])
+node_color = Color(0.76862746, 0.32941177, 0.019607844, 1)
+indicator_offset = Vector2(1, -77)
 
 [node name="MapNode3" parent="Control/PauseScreen/Map" instance=ExtResource("2_rd7dy")]
 layout_mode = 0
-offset_left = 67.0
-offset_top = 39.0
-offset_right = 84.0
-offset_bottom = 49.0
+offset_left = 89.0
+offset_top = 46.0
+offset_right = 115.0
+offset_bottom = 61.0
 linked_scene = "uid://cdys4ulrttigi"
-entrances_top = Array[float]([2.0])
+entrances_top = Array[float]([4.0])
 entrances_right = Array[float]([])
 entrances_bottom = Array[float]([])
 entrances_left = Array[float]([])
+node_color = Color(0.76862746, 0.32941177, 0.019607844, 1)
+indicator_offset = Vector2(-56, -64)
+
+[node name="PlayerIndicator" type="Control" parent="Control/PauseScreen/Map"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control/PauseScreen/Map/PlayerIndicator"]
+layout_mode = 0
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+texture = ExtResource("3_uwtdo")
+expand_mode = 1
 
 [node name="SystemMenuBouton" type="Button" parent="Control/PauseScreen"]
 unique_name_in_owner = true
@@ -145,7 +167,6 @@ text = "System"
 
 [node name="System" type="Control" parent="Control"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

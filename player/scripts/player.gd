@@ -28,6 +28,15 @@ var max_hp : float = 20:
 	set(value):
 		max_hp = value
 		Messages.player_health_changed.emit(hp, max_hp)
+		
+var energy : float = 20 :
+	set(value):
+		energy = clampf(value, 0, max_energy)
+		Messages.player_energy_changed.emit(energy, max_energy)
+var max_energy : float = 20:
+	set(value):
+		max_energy = value
+		Messages.player_energy_changed.emit(energy, max_energy)
 var double_jump : bool = false
 var swim : bool = false 
 var night_vision : bool = false 
@@ -49,6 +58,7 @@ func _ready() -> void:
 	initialize_states()
 	self.call_deferred("reparent",get_tree().root)
 	Messages.player_healed.connect(_on_player_healed)
+	Messages.player_energize.connect(_on_player_energize)
 	pass
 
 #use pour connecter avec le input du joueur
@@ -64,13 +74,18 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_MINUS:
 			if Input.is_key_pressed(KEY_SHIFT):
+				max_energy -=10
 				max_hp -=10
 			else:
+				energy -=5
 				hp -=5
+				
 		elif event.keycode == KEY_EQUAL:
 			if Input.is_key_pressed(KEY_SHIFT):
+				max_energy +=10
 				max_hp +=10
 			else:
+				energy +=5
 				hp +=5
 		
 	change_state(current_state.handle_input(event))
@@ -146,4 +161,8 @@ func update_direction() -> void:
 
 func _on_player_healed(amount : float)-> void:
 	hp = min(hp + amount, max_hp)
+	pass
+
+func _on_player_energize(amount : float)-> void:
+	energy = min(energy + amount, max_energy)
 	pass

@@ -34,6 +34,8 @@ func _on_player_interacted(player: Player) -> void:
 	_player_ref = player
 	if _player_ref.hp < _player_ref.max_hp:
 		Messages.player_healed.emit(2)
+	if _player_ref.energy < _player_ref.max_energy:
+		Messages.player_energize.emit(1)
 	heal_timer.start()
 	SaveManager.save_game()
 
@@ -41,10 +43,15 @@ func _on_heal_tick() -> void:
 	if _player_ref == null or not (_player_ref.current_state is PlayerStateSit):
 		_stop_healing()
 		return
-	if _player_ref.hp >= _player_ref.max_hp:
+	var hp_full := _player_ref.hp >= _player_ref.max_hp
+	var energy_full := _player_ref.energy >= _player_ref.max_energy
+	if hp_full and energy_full:
 		_stop_healing()
 		return
-	Messages.player_healed.emit(2)
+	if not hp_full:
+		Messages.player_healed.emit(2)
+	if not energy_full:
+		Messages.player_energize.emit(1)
 
 func _stop_healing() -> void:
 	heal_timer.stop()

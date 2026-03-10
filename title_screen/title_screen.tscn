@@ -1,9 +1,11 @@
-[gd_scene load_steps=13 format=4 uid="uid://bp60xm6xlg4c7"]
+[gd_scene load_steps=15 format=4 uid="uid://bp60xm6xlg4c7"]
 
 [ext_resource type="TileSet" uid="uid://cwuplu8oy43x3" path="res://levels/tilesets/autumnforest.tres" id="1_dxpbd"]
 [ext_resource type="Script" uid="uid://cwvfm7jj71s1i" path="res://title_screen/title_screen.gd" id="1_vbjqi"]
 [ext_resource type="Texture2D" uid="uid://2bg0duesyrdy" path="res://light_stream.jpg" id="2_2dq6q"]
 [ext_resource type="Texture2D" uid="uid://bwtnu1dysgoo6" path="res://title_screen/yarnbeast_logo.png" id="3_2dq6q"]
+[ext_resource type="Script" uid="uid://b5li354upunjw" path="res://00_global/audio/music/music_auto_trigger.gd" id="5_fk0fn"]
+[ext_resource type="AudioStream" uid="uid://b1mdf34syiw41" path="res://00_global/audio/music/title_01.mp3" id="6_oqrgu"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vbjqi"]
 blend_mode = 1
@@ -281,3 +283,8 @@ text = "Load Save 02"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Load Save 03"
+
+[node name="MusicAutoTrigger" type="Node" parent="."]
+script = ExtResource("5_fk0fn")
+track = ExtResource("6_oqrgu")
+metadata/_custom_type_script = "uid://b5li354upunjw"

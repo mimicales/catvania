@@ -27,6 +27,8 @@ func create_new_game_save(slot :int) -> void:
 		"y" : 167,
 		"hp" : 20, 
 		"max_hp" : 20,
+		"energy" : 20, 
+		"max_energy" : 20,
 		"double_jump" : false, 
 		"swim" : false, 
 		"night_vision" : false, 
@@ -51,6 +53,8 @@ func save_game() -> void:
 		"y" : player.global_position.y,
 		"hp" : player.hp, 
 		"max_hp" : player.max_hp,
+		"energy" : player.energy, 
+		"max_energy" : player.max_energy,
 		"double_jump" : player.double_jump, 
 		"swim" : player.swim, 
 		"night_vision" : player.night_vision, 
@@ -86,6 +90,8 @@ func setup_player() -> void:
 		await get_tree().process_frame
 	player.max_hp = save_data.get("max_hp",20 )
 	player.hp = save_data.get("hp",20 )
+	player.max_energy = save_data.get("max_energy",20 )
+	player.energy = save_data.get("energy",20 )
 	player.double_jump = save_data.get("double_jump",false )
 	player.swim = save_data.get("swim",false )
 	player.night_vision = save_data.get("night_vision",false )

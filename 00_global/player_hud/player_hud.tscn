@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://bqhnlgxsjs80a"]
+[gd_scene load_steps=11 format=3 uid="uid://bqhnlgxsjs80a"]
 
 [ext_resource type="Texture2D" uid="uid://dojqdtdksisjh" path="res://00_global/player_hud/health_bar_frame.png" id="1_hv14i"]
 [ext_resource type="Script" uid="uid://djjvr1lgfy8e7" path="res://00_global/player_hud/player_hud.gd" id="1_vb1bs"]
+[ext_resource type="Texture2D" uid="uid://cqe8lev8go780" path="res://00_global/player_hud/energy_bar.png" id="3_26715"]
 
 [sub_resource type="Gradient" id="Gradient_vb1bs"]
-colors = PackedColorArray(0.9490196, 0.92941177, 0.83137256, 1, 0.9490196, 0.92941177, 0.83137256, 1)
+colors = PackedColorArray(0.91354007, 0.9280687, 0.94418234, 1, 0.9490196, 0.92941177, 0.83137256, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_26715"]
 gradient = SubResource("Gradient_vb1bs")
@@ -14,6 +15,15 @@ colors = PackedColorArray(0.7921569, 0.25490198, 0.3019608, 1, 0.926698, 0.42354
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_4jtec"]
 gradient = SubResource("Gradient_tdgrf")
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tdgrf"]
+gradient = SubResource("Gradient_vb1bs")
+
+[sub_resource type="Gradient" id="Gradient_26715"]
+colors = PackedColorArray(0.078431375, 0.60784316, 0.78431374, 1, 0.37152824, 0.80925256, 0.9871194, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_maesk"]
+gradient = SubResource("Gradient_26715")
 
 [node name="PlayerHud" type="CanvasLayer"]
 process_mode = 3
@@ -62,3 +72,37 @@ value = 50.0
 nine_patch_stretch = true
 texture_under = SubResource("GradientTexture2D_26715")
 texture_progress = SubResource("GradientTexture2D_4jtec")
+
+[node name="EnergyMarginContainer" type="MarginContainer" parent="Control"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(73, 20)
+layout_mode = 0
+offset_left = 12.0
+offset_top = 22.0
+offset_right = 85.0
+offset_bottom = 42.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control/EnergyMarginContainer"]
+layout_mode = 2
+texture = ExtResource("3_26715")
+patch_margin_left = 26
+patch_margin_right = 19
+axis_stretch_horizontal = 1
+
+[node name="EnergyBar" type="TextureProgressBar" parent="Control/EnergyMarginContainer/NinePatchRect"]
+unique_name_in_owner = true
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 14.0
+offset_top = 8.0
+offset_right = -15.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 50.0
+nine_patch_stretch = true
+texture_under = SubResource("GradientTexture2D_tdgrf")
+texture_progress = SubResource("GradientTexture2D_maesk")

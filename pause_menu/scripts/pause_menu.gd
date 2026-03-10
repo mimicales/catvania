@@ -12,18 +12,20 @@ class_name PauseMenu extends CanvasLayer
 @onready var ui_slider: HSlider = %UISlider
 #endregion
 
+
+
 var player: Player
 
 func _ready() -> void:
 	#grab player
 	show_pause_screen()
 	system_menu_bouton.pressed.connect(show_system_menu)
-	#audio setup
+	Audio.setup_button_audio(self)
 	setup_system_menu()
 	pass
 	
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("pause"):
+	if event.is_action_pressed("pause") or event.is_action_pressed("ui_cancel"):
 		get_viewport().set_input_as_handled()
 		get_tree().paused = false
 		queue_free()
@@ -42,6 +44,12 @@ func show_system_menu()  -> void:
 	pass
 
 func setup_system_menu()-> void:
+	music_slider.value = AudioServer.get_bus_volume_linear(2)
+	sfx_slider.value = AudioServer.get_bus_volume_linear(3)
+	ui_slider.value = AudioServer.get_bus_volume_linear(4)
+	
+	music_slider.value_changed.connect(_on_music_slider_changed)
+	
 	back_title_button.pressed.connect(_on_back_to_title_pressed)
 	back_map_button.pressed.connect(show_pause_screen)
 	pass
@@ -50,4 +58,9 @@ func _on_back_to_title_pressed()-> void:
 	get_tree().paused = false
 	queue_free()
 	SceneManager.transition_scene("res://title_screen/title_screen.tscn","", Vector2.ZERO, "up" )
+	pass
+
+func _on_music_slider_changed( v : float)-> void:
+	AudioServer.set_bus_volume_linear(2, v)
+	#save to settings
 	pass

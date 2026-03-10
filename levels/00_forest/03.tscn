@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=4 uid="uid://cdys4ulrttigi"]
+[gd_scene load_steps=7 format=4 uid="uid://cdys4ulrttigi"]
 
 [ext_resource type="Script" uid="uid://swsf8xt1t8e" path="res://general/scripts/levelbounds.gd" id="1_vv2jw"]
 [ext_resource type="TileSet" uid="uid://cwuplu8oy43x3" path="res://levels/tilesets/autumnforest.tres" id="3_7vwju"]
 [ext_resource type="PackedScene" uid="uid://b7cpfd5wffxhd" path="res://general/player_spawn/player_spawn.tscn" id="4_7vwju"]
 [ext_resource type="PackedScene" uid="uid://cqxbl3igmixw8" path="res://general/level_transition/level_transition.tscn" id="4_r7adf"]
+[ext_resource type="Script" uid="uid://b5li354upunjw" path="res://00_global/audio/music/music_auto_trigger.gd" id="5_nqq0o"]
+[ext_resource type="AudioStream" uid="uid://bi84irigagba7" path="res://00_global/audio/music/forest_01.mp3" id="6_c06eb"]
 
 [node name="03" type="Node2D"]
 
@@ -37,3 +39,8 @@ target_area_name = "LevelTransition2"
 
 [node name="PlayerSpawn" parent="." instance=ExtResource("4_7vwju")]
 position = Vector2(56, 168)
+
+[node name="MusicAutoTrigger" type="Node" parent="."]
+script = ExtResource("5_nqq0o")
+track = ExtResource("6_c06eb")
+metadata/_custom_type_script = "uid://b5li354upunjw"

@@ -33,15 +33,17 @@ func _ready() -> void:
 	load_slot_02.pressed.connect(_on_load_game_pressed.bind(1))
 	load_slot_03.pressed.connect(_on_load_game_pressed.bind(2))
 	
+	Audio.setup_button_audio(self)
+	
 	show_main_menu()
 	pass
-	
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		if main_menu.visible == false:
 			show_main_menu()
 	pass
-	
+
 func show_main_menu() -> void:
 	main_menu.visible = true
 	new_game_menu.visible = false
@@ -53,7 +55,7 @@ func show_main_menu() -> void:
 	else:
 		new_game_button.grab_focus()
 	pass
-	
+
 func show_new_game_menu() -> void:
 	main_menu.visible = false
 	new_game_menu.visible = true
@@ -66,7 +68,7 @@ func show_new_game_menu() -> void:
 	if SaveManager.save_file_exists(2):
 		new_slot_03.text = "Replace Save 03"
 	pass
-	
+
 func show_load_game_menu() -> void:
 	main_menu.visible = false
 	new_game_menu.visible = false
@@ -88,18 +90,14 @@ func get_most_recent_slot() -> int:
 				most_recent_slot = i
 	return most_recent_slot
 
-
 func _on_continue_pressed() -> void:
 	SaveManager.load_game(get_most_recent_slot())
 	pass
-
-
 
 func _on_new_game_pressed(slot : int) -> void:
 	SaveManager.create_new_game_save(slot)
 	SceneManager.transition_scene("uid://bpmbexp2p7wki","", Vector2.ZERO, "up") #mettre la scène de début de jeu ici
 	pass
-
 
 func _on_load_game_pressed(slot : int) -> void:
 	SaveManager.load_game(slot)
