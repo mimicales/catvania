@@ -65,15 +65,15 @@ func fade_track_in(player : AudioStreamPlayer)-> void:
 func set_reverb(type:REVERB_TYPE)-> void:
 	pass
 
-func play_spatial_sound(audio: AudioStream, pos:Vector2)-> void:
+func play_spatial_sound(audio: AudioStream, pos:Vector2) -> AudioStreamPlayer2D:
 	var ap: AudioStreamPlayer2D = AudioStreamPlayer2D.new()
 	add_child(ap)
 	ap.bus = "SFX"
 	ap.global_position = pos
 	ap.stream = audio
-	ap.finished.connect (ap.queue_free)
+	ap.finished.connect(ap.queue_free)
 	ap.play()
-	pass
+	return ap
 
 func setup_button_audio(node : Node) -> void:
 	for c in node.find_children("*", "Button"):

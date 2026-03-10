@@ -7,6 +7,8 @@ class_name SavePoint extends Node2D
 var heal_timer: Timer
 var _player_ref: Player = null
 
+const save_audio = preload("uid://dbkmg4s1qtipw")
+
 
 func _ready() -> void:
 	area_2d.body_entered.connect(_on_player_entered)
@@ -20,14 +22,23 @@ func _on_player_entered(_n: Node2D) -> void:
 	Messages.player_interacted.connect(_on_player_interacted)
 	Messages.input_hint_changed.emit("action")
 
+var _save_audio_player: AudioStreamPlayer2D = null
+
 func _on_player_exited(_n: Node2D) -> void:
 	Messages.player_interacted.disconnect(_on_player_interacted)
 	Messages.input_hint_changed.emit("")
+	if _save_audio_player:
+		_save_audio_player.queue_free()
+		_save_audio_player = null
 	_stop_healing()
 	SaveManager.save_game()
 
 func _on_player_interacted(player: Player) -> void:
+	if _save_audio_player:
+		_save_audio_player.queue_free()
+		_save_audio_player = null
 	Messages.input_hint_changed.emit("")
+	_save_audio_player = Audio.play_spatial_sound(save_audio, global_position)
 	player.change_state(player.current_state.sit)
 	animation_player.play("game_saved")
 	animation_player.seek(0)
