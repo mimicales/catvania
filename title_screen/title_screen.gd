@@ -8,6 +8,8 @@ extends CanvasLayer
 @onready var continue_button: Button = %ContinueButton
 @onready var new_game_button: Button = %NewGameButton
 @onready var load_game_button: Button = %LoadGameButton
+@onready var quit_game_button: Button = %QuitGameButton
+
 
 @onready var new_slot_01: Button = %NewSlot01
 @onready var new_slot_02: Button = %NewSlot02
@@ -24,6 +26,7 @@ func _ready() -> void:
 	continue_button.pressed.connect(_on_continue_pressed)
 	new_game_button.pressed.connect(show_new_game_menu)
 	load_game_button.pressed.connect(show_load_game_menu)
+	quit_game_button.pressed.connect(_on_quit_pressed)
 	
 	new_slot_01.pressed.connect(_on_new_game_pressed.bind(0))
 	new_slot_02.pressed.connect(_on_new_game_pressed.bind(1))
@@ -92,6 +95,10 @@ func get_most_recent_slot() -> int:
 
 func _on_continue_pressed() -> void:
 	SaveManager.load_game(get_most_recent_slot())
+	pass
+
+func _on_quit_pressed() -> void:
+	get_tree().quit()
 	pass
 
 func _on_new_game_pressed(slot : int) -> void:

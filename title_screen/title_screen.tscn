@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://bp60xm6xlg4c7"]
+[gd_scene load_steps=16 format=4 uid="uid://bp60xm6xlg4c7"]
 
 [ext_resource type="TileSet" uid="uid://cwuplu8oy43x3" path="res://levels/tilesets/autumnforest.tres" id="1_dxpbd"]
 [ext_resource type="Script" uid="uid://cwvfm7jj71s1i" path="res://title_screen/title_screen.gd" id="1_vbjqi"]
@@ -75,6 +75,17 @@ _data = {
 &"RESET": SubResource("Animation_0m3ch"),
 &"logo_menu": SubResource("Animation_vbjqi")
 }
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fk0fn"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 0.64705884, 0.40784314, 0.63529414)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="TitleScreen" type="CanvasLayer"]
 layer = 5
@@ -170,11 +181,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -80.0
-offset_top = -16.0
+offset_top = -42.0
 offset_right = 80.0
-offset_bottom = 104.0
+offset_bottom = 116.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.87981653, 0.87981653)
 theme_override_constants/separation = 8
 
 [node name="Logo" type="Control" parent="Control/MainMenu"]
@@ -198,17 +210,26 @@ autoplay = "logo_menu"
 [node name="ContinueButton" type="Button" parent="Control/MainMenu"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_fk0fn")
 text = "Continue"
 
 [node name="NewGameButton" type="Button" parent="Control/MainMenu"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_fk0fn")
 text = "New Game"
 
 [node name="LoadGameButton" type="Button" parent="Control/MainMenu"]
 unique_name_in_owner = true
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_fk0fn")
 text = "Load Game"
+
+[node name="QuitGameButton" type="Button" parent="Control/MainMenu"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_fk0fn")
+text = "Quit"
 
 [node name="NewGameMenu" type="VBoxContainer" parent="Control"]
 unique_name_in_owner = true
