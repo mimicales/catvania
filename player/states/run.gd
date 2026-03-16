@@ -21,6 +21,8 @@ func handle_input(_event : InputEvent) -> PlayerState:
 
 #what happens each process frame in this state?
 func process(_delta: float) -> PlayerState:
+	if player.direction.y < -0.5 and climb.is_on_climbable():
+		return climb
 	if player.direction.x == 0:
 		return idle
 	elif player.direction.y > 0.5:
@@ -33,3 +35,23 @@ func physics_process(_delta: float) -> PlayerState:
 	if player.is_on_floor() == false:
 		return fall
 	return next_state
+
+func get_surface_type() -> String:
+	var containers = player.get_tree().get_nodes_in_group("tilemap")
+	for container in containers:
+		for child in container.get_children():
+			var tilemap = child as TileMapLayer
+			if not tilemap:
+				continue
+			var local_pos = tilemap.to_local(player.global_position + Vector2(0, 4))
+			var cell = tilemap.local_to_map(local_pos)
+			var data = tilemap.get_cell_tile_data(cell)  # pas de paramètre layer
+			if data:
+				var surface = data.get_custom_data("surface_type")
+				if surface != "":
+					return surface
+	return "default"
+
+func play_footstep() -> void:
+	var surface = get_surface_type()
+	Audio.play_run_step(surface)

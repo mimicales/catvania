@@ -1,11 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://ddfnxtlr8krma"]
+[gd_scene load_steps=10 format=3 uid="uid://ddfnxtlr8krma"]
 
 [ext_resource type="Script" uid="uid://dxmyxxa3y1e41" path="res://00_global/audio/audio.gd" id="1_qqy3t"]
 [ext_resource type="AudioStream" uid="uid://b2v57023kcs82" path="res://00_global/audio/ui_audio/ui_bloop_audio.wav" id="2_4l0er"]
-[ext_resource type="AudioStream" uid="uid://gcxtucl3ckfg" path="res://00_global/audio/ui_audio/ui_select_audio.mp3" id="3_4l0er"]
+[ext_resource type="AudioStream" uid="uid://cy70shj68dyg" path="res://00_global/audio/ui_audio/ui_select_audio.wav" id="3_4l0er"]
 [ext_resource type="AudioStream" uid="uid://bqpx6v1xpifjw" path="res://00_global/audio/ui_audio/ui_woosh.wav" id="4_6abs4"]
 [ext_resource type="AudioStream" uid="uid://smh7i3u8h7yy" path="res://00_global/audio/ui_audio/ui_success_audio.wav" id="5_ts5ui"]
 [ext_resource type="AudioStream" uid="uid://cncaclxkn8nmp" path="res://00_global/audio/ui_audio/ui_error_audio.wav" id="6_diqwh"]
+[ext_resource type="AudioStream" uid="uid://yspnd2r42s" path="res://player/audio/run_sound.wav" id="7_dvici"]
+[ext_resource type="AudioStream" uid="uid://ckiq7nw3nxx28" path="res://player/audio/run_stone_sound.wav" id="8_6abs4"]
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_6i7w7"]
 polyphony = 16
@@ -18,6 +20,10 @@ ui_select_audio = ExtResource("3_4l0er")
 ui_cancel_audio = ExtResource("4_6abs4")
 ui_success_audio = ExtResource("5_ts5ui")
 ui_error_audio = ExtResource("6_diqwh")
+run_sounds = Dictionary[String, AudioStream]({
+"feuilles": ExtResource("7_dvici"),
+"roches": ExtResource("8_6abs4")
+})
 
 [node name="Music1" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
@@ -31,3 +37,7 @@ bus = &"Music"
 unique_name_in_owner = true
 stream = SubResource("AudioStreamPolyphonic_6i7w7")
 bus = &"UI"
+
+[node name="RunSound" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"Run_Sound"

@@ -103,7 +103,7 @@ func _on_quit_pressed() -> void:
 
 func _on_new_game_pressed(slot : int) -> void:
 	SaveManager.create_new_game_save(slot)
-	SceneManager.transition_scene("uid://bpmbexp2p7wki","", Vector2.ZERO, "up") #mettre la scène de début de jeu ici
+	SceneManager.transition_scene("uid://cdys4ulrttigi","", Vector2.ZERO, "up") #mettre la scène de début de jeu ici
 	pass
 
 func _on_load_game_pressed(slot : int) -> void:

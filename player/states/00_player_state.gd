@@ -11,6 +11,8 @@ var next_state : PlayerState
 @onready var fall: PlayerStateFall = %Fall
 @onready var crouch: PlayerStateCrouch = %Crouch
 @onready var sit: PlayerStateSit = %Sit
+@onready var climb: PlayerStateClimb = %Climb
+
 #endregion
 
 #what happens when this state is initialized

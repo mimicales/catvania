@@ -9,6 +9,8 @@ enum REVERB_TYPE{NONE, SMALL, MEDIUM, LARGE}
 @export var ui_success_audio : AudioStream
 @export var ui_error_audio : AudioStream
 
+@export var run_sounds: Dictionary[String, AudioStream] = {}
+
 var current_track : int = 0
 var music_tweens : Array [Tween]
 var ui_audio_player : AudioStreamPlaybackPolyphonic
@@ -16,7 +18,7 @@ var ui_audio_player : AudioStreamPlaybackPolyphonic
 @onready var music_1: AudioStreamPlayer = %Music1
 @onready var music_2: AudioStreamPlayer = %Music2
 @onready var ui: AudioStreamPlayer = %UI
-
+@onready var run_sfx: AudioStreamPlayer = %RunSound
 
 func _ready() -> void:
 	ui.play()
@@ -107,3 +109,8 @@ func ui_error()-> void:
 	play_ui_audio(ui_error_audio)
 	pass
 #endregion
+
+func play_run_step(surface_type: String) -> void:
+	if run_sounds.has(surface_type):
+		run_sfx.stream = run_sounds[surface_type]
+		run_sfx.play()

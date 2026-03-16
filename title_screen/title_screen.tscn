@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://bp60xm6xlg4c7"]
+[gd_scene load_steps=19 format=4 uid="uid://bp60xm6xlg4c7"]
 
 [ext_resource type="TileSet" uid="uid://cwuplu8oy43x3" path="res://levels/tilesets/autumnforest.tres" id="1_dxpbd"]
 [ext_resource type="Script" uid="uid://cwvfm7jj71s1i" path="res://title_screen/title_screen.gd" id="1_vbjqi"]
@@ -81,7 +81,50 @@ content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
 content_margin_bottom = 4.0
-bg_color = Color(1, 0.64705884, 0.40784314, 0.63529414)
+bg_color = Color(1, 0.64705884, 0.40784314, 0.8117647)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oqrgu"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.76862746, 0.32941177, 0.019607844, 0.80784315)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fv0o7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.76862746, 0.32941177, 0.019607844, 0.80784315)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1oos5"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.76862746, 0.32941177, 0.019607844, 0.80784315)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
@@ -211,24 +254,36 @@ autoplay = "logo_menu"
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_fk0fn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_oqrgu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fv0o7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_1oos5")
 text = "Continue"
 
 [node name="NewGameButton" type="Button" parent="Control/MainMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_fk0fn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_oqrgu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fv0o7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_1oos5")
 text = "New Game"
 
 [node name="LoadGameButton" type="Button" parent="Control/MainMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_fk0fn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_oqrgu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fv0o7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_1oos5")
 text = "Load Game"
 
 [node name="QuitGameButton" type="Button" parent="Control/MainMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_fk0fn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_oqrgu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_fv0o7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_1oos5")
 text = "Quit"
 
 [node name="NewGameMenu" type="VBoxContainer" parent="Control"]

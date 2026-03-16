@@ -47,6 +47,8 @@ func process(delta: float) -> PlayerState:
 
 #what happens each process frame in this state?
 func physics_process(_delta: float) -> PlayerState:
+	if climb.is_on_climbable() and player.direction.y < -0.5:
+		return climb
 	if player.is_on_floor():
 		if buffer_timer > 0:
 			return jump

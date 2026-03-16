@@ -3,6 +3,7 @@ class_name PlayerSpawn extends Node2D
 
 
 func _ready() -> void:
+	add_to_group("PlayerSpawn")
 	visible = false
 	await get_tree().process_frame
 	#check to see if we have a player

@@ -14,16 +14,34 @@ func _ready() -> void:
 	
 func apply_camera_limits() -> void:
 	var camera : Camera2D = get_viewport().get_camera_2d()
-	if not camera:
+	while not camera:
 		await get_tree().process_frame
 		apply_camera_limits()
 		return
 	camera = get_viewport().get_camera_2d()
-	camera.limit_left = int( global_position.x)
-	camera.limit_top = int( global_position.y)
-	camera.limit_right = int( global_position.x) +width
-	camera.limit_bottom = int( global_position.y) +height
+	camera.limit_left = int(global_position.x)
+	camera.limit_top = int(global_position.y)
+	camera.limit_right = int(global_position.x) + width
+	camera.limit_bottom = int(global_position.y) + height
 	pass
+
+func _process(_delta: float) -> void:
+	if Engine.is_editor_hint():
+		return
+	if SceneManager.is_transitioning:
+		return
+	var player : Node2D = get_tree().get_first_node_in_group("Player")
+	if not player:
+		return
+	var bounds := Rect2(global_position, Vector2(width, height))
+	if not bounds.has_point(player.global_position):
+		_respawn_player(player)
+
+func _respawn_player(player: Node2D) -> void:
+	var spawn : Node2D = get_tree().get_first_node_in_group("PlayerSpawn")
+	if spawn:
+		player.global_position = spawn.global_position
+	player.hp -= 2
 
 func _draw() -> void:
 	if Engine.is_editor_hint():
@@ -36,7 +54,6 @@ func _on_width_changed( new_width :int) -> void:
 	width = new_width
 	queue_redraw()
 	pass
-
 
 func _on_height_changed( new_height :int) -> void:
 	height = new_height
