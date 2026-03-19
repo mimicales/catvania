@@ -8,6 +8,7 @@ class_name Player extends CharacterBody2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
+
 @export var max_fall_velocity : float = 600
 @export var move_speed : float = 150
 
@@ -70,24 +71,25 @@ func _unhandled_input(event: InputEvent) -> void:
 		var pause_menu : PauseMenu = load("res://pause_menu/pause_menu.tscn").instantiate()
 		add_child(pause_menu)
 		return
-	#A ENLEVER EVENTUELLEMENT
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_MINUS:
-			if Input.is_key_pressed(KEY_SHIFT):
-				max_energy -=10
-				max_hp -=10
-			else:
-				energy -=5
-				hp -=5
-				
-		elif event.keycode == KEY_EQUAL:
-			if Input.is_key_pressed(KEY_SHIFT):
-				max_energy +=10
-				max_hp +=10
-			else:
-				energy +=5
-				hp +=5
-		
+	#DEBUG
+	if OS.is_debug_build():
+		if event is InputEventKey and event.pressed:
+			if event.keycode == KEY_MINUS:
+				if Input.is_key_pressed(KEY_SHIFT):
+					max_energy -=10
+					max_hp -=10
+				else:
+					energy -=5
+					hp -=5
+					
+			elif event.keycode == KEY_EQUAL:
+				if Input.is_key_pressed(KEY_SHIFT):
+					max_energy +=10
+					max_hp +=10
+				else:
+					energy +=5
+					hp +=5
+	# end DEBUG
 	change_state(current_state.handle_input(event))
 	pass
 
@@ -143,7 +145,6 @@ func change_state( new_state : PlayerState) -> void:
 	$Label.text = current_state.name
 	pass
 
-
 func update_direction() -> void:
 	var prev_direction : Vector2 = direction
 	
@@ -157,7 +158,6 @@ func update_direction() -> void:
 		elif direction.x >0:
 			sprite.flip_h = false
 	pass
-
 
 func _on_player_healed(amount : float)-> void:
 	hp = min(hp + amount, max_hp)

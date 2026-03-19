@@ -14,7 +14,7 @@ config/name="YarnBeast"
 config/description="Tes voisins ont presque tous disparu et c'est à toi de les retrouver! Un metroidvania cosy en 2D où chaque zone cache des compagnons à retrouver, des secrets à percer et des chemins à débloquer grâce à de nouvelles capacités. Réussiras-tu à sauver ton village?"
 run/main_scene="uid://bp60xm6xlg4c7"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://cxkur5kn7p8ju"
 
 [autoload]
 

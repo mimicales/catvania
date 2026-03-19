@@ -64,7 +64,7 @@ func fade_track_in(player : AudioStreamPlayer)-> void:
 	tween.tween_property(player, "volume_linear", 1.0, 1.0)
 	pass
 
-func set_reverb(type:REVERB_TYPE)-> void:
+func set_reverb(_type:REVERB_TYPE)-> void:
 	pass
 
 func play_spatial_sound(audio: AudioStream, pos:Vector2) -> AudioStreamPlayer2D:

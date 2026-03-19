@@ -2,7 +2,7 @@
 extends Node
 
 const SLOTS : Array[String] = ["save_01","save_02","save_03" ]
-
+const CONFIG_FILE_PATH = "user://settings.cfg"
 
 var current_slot : int = 0
 var save_data : Dictionary
@@ -11,6 +11,7 @@ var persistent_data : Dictionary = {}
 
 
 func _ready() -> void:
+	load_configuration()
 	SceneManager.scene_entered.connect(_on_scene_entered)
 	pass
 
@@ -19,7 +20,7 @@ func create_new_game_save(slot :int) -> void:
 	discovered_areas.clear()
 	persistent_data.clear()
 	#liste de tout ce qu'on doit savoir pour enregistrer, les habiletés, etc...
-	var new_game_scene : String = "uid://bpmbexp2p7wki" #scene du début du jeu à changer éventuellement
+	var new_game_scene : String = "uid://cdys4ulrttigi" #scene du début du jeu à changer éventuellement
 	discovered_areas.append(new_game_scene)
 	save_data = {
 		"scene_path" : new_game_scene,
@@ -76,7 +77,7 @@ func load_game(slot :int) -> void:
 	
 	persistent_data = save_data.get("persistent_data",{} )
 	discovered_areas = save_data.get("discovered_areas",[] )
-	var scene_path : String = save_data.get("scene_path","uid://bpmbexp2p7wki" )
+	var scene_path : String = save_data.get("scene_path","uid://cdys4ulrttigi")
 	SceneManager.transition_scene(scene_path,"", Vector2.ZERO, "up" )
 	await SceneManager.new_scene_ready
 	setup_player()
@@ -118,3 +119,36 @@ func _on_scene_entered(scene_uid :String) -> void:
 	else:
 		discovered_areas.append(scene_uid)
 	pass
+
+
+func save_configuration() -> void:
+	var config := ConfigFile.new()
+	config.set_value("audio", "music", AudioServer.get_bus_volume_linear(2))
+	config.set_value("audio", "sfx", AudioServer.get_bus_volume_linear(3))
+	config.set_value("audio", "ui", AudioServer.get_bus_volume_linear(4))
+	config.save(CONFIG_FILE_PATH)
+	pass
+
+
+func load_configuration() -> void:
+	var config := ConfigFile.new()
+	var err = config.load(CONFIG_FILE_PATH)
+	if err != OK:
+		AudioServer.set_bus_volume_linear(2, 0.8)
+		AudioServer.set_bus_volume_linear(3,0.8)
+		AudioServer.set_bus_volume_linear(4,0.8)
+		save_configuration()
+		return
+	AudioServer.set_bus_volume_linear(2,config.get_value("audio", "music", 0.8))
+	AudioServer.set_bus_volume_linear(3,config.get_value("audio", "sfx", 1))
+	AudioServer.set_bus_volume_linear(4,config.get_value("audio", "ui", 1))
+	pass
+
+func discover_transition(target_uid: String) -> void:
+	var list : Array = persistent_data.get("discovered_transitions", [])
+	if not list.has(target_uid):
+		list.append(target_uid)
+		persistent_data["discovered_transitions"] = list
+
+func is_transition_discovered(target_uid: String) -> bool:
+	return persistent_data.get("discovered_transitions", []).has(target_uid)

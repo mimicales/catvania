@@ -1,7 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://yh0f0h2iwc1g"]
+[gd_scene load_steps=28 format=3 uid="uid://yh0f0h2iwc1g"]
 
 [ext_resource type="Script" uid="uid://0fqcg2euv6w8" path="res://player/scripts/player.gd" id="1_oul6g"]
-[ext_resource type="PackedScene" uid="uid://dsl10b5bbyn8i" path="res://general/cast_shadow.tscn" id="2_ebec5"]
+[ext_resource type="Script" uid="uid://csnrdkxnxmm0d" path="res://general/scripts/cast_shadow.gd" id="2_ebec5"]
 [ext_resource type="Script" uid="uid://ddgt6irt84rrx" path="res://player/states/idle.gd" id="2_g1dw6"]
 [ext_resource type="Script" uid="uid://t2h2qsoxtlng" path="res://player/states/run.gd" id="3_yw30f"]
 [ext_resource type="Script" uid="uid://b8dbvcdb7y62k" path="res://player/states/jump.gd" id="4_yw30f"]
@@ -12,6 +12,16 @@
 [ext_resource type="Script" uid="uid://b6o1v16mktl52" path="res://player/climb.gd" id="8_2ieo8"]
 [ext_resource type="Script" uid="uid://yv4olju312eo" path="res://player/scripts/input_hints.gd" id="9_8t03j"]
 [ext_resource type="Texture2D" uid="uid://b6qm011nd5p4u" path="res://player/sprites/input_icons.png" id="9_hg6s5"]
+
+[sub_resource type="Gradient" id="Gradient_yllr7"]
+offsets = PackedFloat32Array(0.4642857, 1)
+colors = PackedColorArray(1, 1, 1, 0.7176471, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kb6p2"]
+gradient = SubResource("Gradient_yllr7")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_boad6"]
 radius = 7.0
@@ -169,6 +179,15 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_boad6"]
 
+[sub_resource type="Gradient" id="Gradient_boad6"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rgyib"]
+gradient = SubResource("Gradient_boad6")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.86206895, 0.5)
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 z_index = 1
 collision_layer = 16
@@ -177,7 +196,18 @@ floor_constant_speed = true
 floor_snap_length = 1.5
 script = ExtResource("1_oul6g")
 
-[node name="CastShadow" parent="." instance=ExtResource("2_ebec5")]
+[node name="CastShadow" type="Node2D" parent="."]
+script = ExtResource("2_ebec5")
+
+[node name="RayCast2D" type="RayCast2D" parent="CastShadow"]
+enabled = false
+target_position = Vector2(0, 64)
+
+[node name="Sprite2D" type="Sprite2D" parent="CastShadow"]
+modulate = Color(0.24705882, 0.21176471, 0.1882353, 0.4627451)
+position = Vector2(1.4210855e-14, 3)
+scale = Vector2(0.3671875, 0.10839844)
+texture = SubResource("GradientTexture2D_kb6p2")
 
 [node name="States" type="Node" parent="."]
 
@@ -252,6 +282,12 @@ collision_mask = 2
 process_mode = 3
 position = Vector2(1, -41)
 position_smoothing_speed = 50.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -27)
+color = Color(0.5529412, 1, 1, 1)
+energy = 0.43
+texture = SubResource("GradientTexture2D_rgyib")
 
 [node name="InputHints" type="Node2D" parent="."]
 position = Vector2(0, -63)

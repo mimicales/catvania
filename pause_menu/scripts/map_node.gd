@@ -25,7 +25,7 @@ func _ready() -> void:
 		pass
 	else:
 		label.queue_free()
-		create_transition_blocks()
+		update_node()
 		if not SaveManager.is_area_discovered(linked_scene):
 			visible = false
 		elif SceneManager.current_scene_uid == linked_scene:
@@ -81,6 +81,8 @@ func create_entrance_data(transitions : Array[LevelTransition])-> void:
 	entrances_right.clear()
 	entrances_top.clear()
 	for t in transitions:
+		if not Engine.is_editor_hint() and not t.show_on_map and not SaveManager.is_transition_discovered(t.target_level):
+			continue
 		var pos : Vector2 = (t.position - indicator_offset) /SCALE_FACTOR
 		if t.location == LevelTransition.SIDE.LEFT:
 			var offset : float = clampf(pos.y -3,2.0, self.size.y -5)

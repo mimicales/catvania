@@ -23,8 +23,10 @@ func transition_scene(new_scene : String, target_area : String, player_offset : 
 	get_tree().change_scene_to_file(new_scene)
 	current_scene_uid = ResourceUID.path_to_uid(new_scene)
 	scene_entered.emit(current_scene_uid)
+	
 	await get_tree().scene_changed
 	new_scene_ready.emit(target_area, player_offset)
+	
 	await get_tree().process_frame
 	load_scene_finished.emit()
 	is_transitioning = false

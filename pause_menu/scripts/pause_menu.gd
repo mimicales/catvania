@@ -13,8 +13,8 @@ class_name PauseMenu extends CanvasLayer
 #endregion
 
 
-
 var player: Player
+var player_position : Vector2
 
 func _ready() -> void:
 	#grab player
@@ -22,6 +22,8 @@ func _ready() -> void:
 	system_menu_bouton.pressed.connect(show_system_menu)
 	Audio.setup_button_audio(self)
 	setup_system_menu()
+	if player:
+		player_position = player.global_position
 	pass
 	
 func _unhandled_input(event: InputEvent) -> void:
@@ -49,6 +51,8 @@ func setup_system_menu()-> void:
 	ui_slider.value = AudioServer.get_bus_volume_linear(4)
 	
 	music_slider.value_changed.connect(_on_music_slider_changed)
+	sfx_slider.value_changed.connect(_on_sfx_slider_changed)
+	ui_slider.value_changed.connect(_on_ui_slider_changed)
 	
 	back_title_button.pressed.connect(_on_back_to_title_pressed)
 	back_map_button.pressed.connect(show_pause_screen)
@@ -62,5 +66,17 @@ func _on_back_to_title_pressed()-> void:
 
 func _on_music_slider_changed( v : float)-> void:
 	AudioServer.set_bus_volume_linear(2, v)
-	#save to settings
+	SaveManager.save_configuration()
+	pass
+
+func _on_sfx_slider_changed( v : float)-> void:
+	AudioServer.set_bus_volume_linear(3, v)
+	Audio.play_spatial_sound(Audio.ui_focus_audio, player_position)
+	SaveManager.save_configuration()
+	pass
+	
+func _on_ui_slider_changed( v : float)-> void:
+	AudioServer.set_bus_volume_linear(4, v)
+	Audio.ui_focus_change()
+	SaveManager.save_configuration()
 	pass

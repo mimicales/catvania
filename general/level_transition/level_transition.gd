@@ -17,6 +17,7 @@ enum SIDE { LEFT, RIGHT, TOP, BOTTOM }
 
 @export_file("*.tscn") var target_level : String = ""
 @export var target_area_name : String = "LevelTransition"
+@export var show_on_map : bool = true
 
 @onready var area_2d: Area2D = $Area2D
 
@@ -28,10 +29,10 @@ func _ready() -> void:
 	SceneManager.load_scene_finished.connect(_on_load_scene_finished)
 	pass
 
-func _on_player_entered( _n: Node2D) -> void:
-	#transition the attached level
-	SceneManager.transition_scene (target_level, target_area_name, get_offset(_n),"left" )
-	pass
+func _on_player_entered(_n: Node2D) -> void:
+	if not show_on_map:
+		SaveManager.discover_transition(target_level)
+	SceneManager.transition_scene(target_level, target_area_name, get_offset(_n), "left")
 
 
 func _on_new_scene_ready(target_name : String, offset : Vector2) -> void:
